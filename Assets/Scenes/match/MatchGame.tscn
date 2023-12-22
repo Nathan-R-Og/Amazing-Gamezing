@@ -1,30 +1,24 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://ct4ibuw52rqo7"]
 
-[ext_resource path="res://Assets/Scenes/match/MatchGame.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://Assets/Scenes/match/MatchGame.gd" id="1"]
 
 [node name="MatchGame" type="Node2D"]
-script = ExtResource( 1 )
-gridPx = Vector2( 10, 10 )
-gridSpacing = Vector2( 96, 96 )
+script = ExtResource("1")
+gridPx = Vector2i(10, 10)
+gridSpacing = Vector2(96, 96)
 
 [node name="Tile" type="Node2D" parent="."]
-position = Vector2( 128, 128 )
+position = Vector2(128, 128)
 
 [node name="Button" type="Button" parent="."]
-margin_left = 264.298
-margin_top = 245.611
-margin_right = 495.298
-margin_bottom = 429.611
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_left = 264.298
+offset_top = 245.611
+offset_right = 495.298
+offset_bottom = 429.611
 
 [node name="shuffle" type="Button" parent="."]
-margin_left = 862.51
-margin_top = 492.449
-margin_right = 989.51
-margin_bottom = 578.449
+offset_left = 862.51
+offset_top = 492.449
+offset_right = 989.51
+offset_bottom = 578.449
 text = "shuffle"
-__meta__ = {
-"_edit_use_anchors_": false
-}

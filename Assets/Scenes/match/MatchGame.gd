@@ -1,6 +1,6 @@
 extends Node2D
-export var gridPx = Vector2()
-export var gridSpacing = Vector2()
+@export var gridPx = Vector2i()
+@export var gridSpacing = Vector2()
 
 var selecting = false
 var selected = []
@@ -9,8 +9,8 @@ var MATCH = []
 var img = []
 
 func _ready():
-	$Button.connect("pressed", self, "start")
-	$shuffle.connect("pressed", self, "shuffle")
+	$Button.pressed.connect(start)
+	$shuffle.pressed.connect(shuffle)
 	print("ready!")
 	generate()
 
@@ -37,12 +37,12 @@ func render():
 		child.queue_free()
 
 	for tileIndex in MATCH.size():
-		var tileInstance = preload("TileInstance.tscn").instance()
+		var tileInstance = preload("TileInstance.tscn").instantiate()
 		var tileData = MATCH[tileIndex]
 		tileInstance.get_node("icon").frame = wrapi(tileData.matchId, 0, 0)
 		tileInstance.get_node("icon").self_modulate = img[tileData.matchId]
-		tileInstance.get_node("click").connect("input_event", self, "_tileClick", [tileData, tileInstance])
-		tileInstance.position = Vector2(tileIndex % int(gridPx.x), floor(tileIndex / gridPx.x)) * gridSpacing
+		tileInstance.get_node("click").input_event.connect(_tileClick.bind(tileData, tileInstance))
+		tileInstance.position = Vector2(tileIndex % gridPx.x, floor(tileIndex / gridPx.x)) * gridSpacing
 		$Tile.add_child(tileInstance)
 
 func _tileClick(vp, event:InputEvent, shape, tileData, node):
@@ -52,10 +52,10 @@ func _tileClick(vp, event:InputEvent, shape, tileData, node):
 		selecting = true
 		tileData.clicked = !tileData.clicked
 		selected = [tileData, node]
-		node.get_node("icon").modulate = Color.black
+		node.get_node("icon").modulate = Color.BLACK
 	else:
-		node.get_node("icon").modulate = Color.white
-		selected[1].get_node("icon").modulate = Color.white
+		node.get_node("icon").modulate = Color.WHITE
+		selected[1].get_node("icon").modulate = Color.WHITE
 		if tileData.matchId != selected[0].matchId:
 			#$WRONG.play()
 			print("WRONG")
@@ -63,8 +63,8 @@ func _tileClick(vp, event:InputEvent, shape, tileData, node):
 		else:
 			#$Right.play()
 			print("thats right!")
-			MATCH.remove(MATCH.find(tileData))
-			MATCH.remove(MATCH.find(selected[0]))
+			MATCH.remove_at(MATCH.find(tileData))
+			MATCH.remove_at(MATCH.find(selected[0]))
 			node.queue_free()
 			selected[1].queue_free()
 			for resetID in MATCH.size(): MATCH[resetID].myId = resetID

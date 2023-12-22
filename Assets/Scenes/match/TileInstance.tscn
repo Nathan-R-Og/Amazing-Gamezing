@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://icon.png" type="Texture2D" id=1]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -20,7 +20,7 @@ extents = Vector2( 32, 32 )
 
 [node name="TileInstance" type="Node2D"]
 
-[node name="icon" type="AnimatedSprite" parent="."]
+[node name="icon" type="AnimatedSprite2D" parent="."]
 frames = SubResource( 1 )
 animation = "flowey"
 
