@@ -11,8 +11,16 @@ config_version=4
 [application]
 
 config/name="Match game"
-run/main_scene="res://Scenes/MatchGame.tscn"
+run/main_scene="res://Assets/Scenes/match/MatchGame.tscn"
 config/icon="res://icon.png"
+
+[input]
+
+click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
 
 [physics]
 
